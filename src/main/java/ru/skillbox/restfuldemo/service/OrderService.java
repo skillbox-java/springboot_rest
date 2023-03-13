@@ -1,6 +1,7 @@
 package ru.skillbox.restfuldemo.service;
 
 import org.springframework.stereotype.Service;
+import ru.skillbox.restfuldemo.exception.OrderNotFoundException;
 import ru.skillbox.restfuldemo.model.Order;
 
 import java.util.Collection;
@@ -85,13 +86,10 @@ public class OrderService {
         var order = orders.get(uuid);
 
         if (order == null) {
-            throw notFoundOrderException();
+            throw new OrderNotFoundException();
         }
 
         return order;
     }
 
-    private static RuntimeException notFoundOrderException() {
-        return new RuntimeException("Заказ не найден");
-    }
 }
